@@ -1,117 +1,53 @@
-import * as SplashScreen from 'expo-splash-screen';
-import { ImageBackground } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View,  Text, ScrollView } from 'react-native';
-
-
+import {View, Text, ActivityIndicator, Button ,StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const simularCarga = () => {
+    setLoading(true);
+    setMessage('');
+    setTimeout(() => {
+      setLoading(false);
+      setMessage('');
+    }, 3000);
+  }
+
   return (
-    <ScrollView contentContainerStyle={styles.background} showsVerticalScrollIndicator={false} horizontal={true}>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-      <Text>Hola Mundo</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text>Carga</Text>
+      {loading ? (
+        <>
+          <ActivityIndicator size="large" color="#CC6CE7"/>
+          <Text style={styles.titulo}>CARGANDO...</Text>
+        </>
+      ) : (
+        <>
+          <Button title="Iniciar carga" onPress={simularCarga} />
+          <Text style={styles.exito}>Carga completada</Text>
+          {message ? <Text>{message}</Text> : null}
+        </>
+      )} 
+    </View>
   );
 }
 
-
-
-// 4. Estilos simples
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    color: 'white',
-    fontSize: 32,
+  titulo: {
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
   },
-  subtitle: {
-    color: 'white',
-    fontSize: 18,
-  }
+  exito: {
+    fontSize: 16,
+    color: 'green',
+    marginTop: 10,
+  },
 });
+
